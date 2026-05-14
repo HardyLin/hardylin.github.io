@@ -2,10 +2,10 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>文字朗讀</title>
+  <title>選擇聲音朗讀</title>
 </head>
 <body>
-  <h2>文字朗讀範例</h2>
+  <h2>SpeechSynthesisUtterance 選擇聲音朗讀</h2>
 
   <input
     id="textInput"
@@ -14,33 +14,82 @@
     style="width: 300px; padding: 8px;"
   />
 
-  <button onclick="speakText()">朗讀</button>
+  <br /><br />
+
+  <select id="voiceSelect" style="width: 320px; padding: 8px;">
+    <option>載入 voices 中...</option>
+  </select>
+
+  <br /><br />
+
+  <button id="speakBtn">朗讀</button>
 
   <script>
+    const textInput = document.getElementById("textInput");
+    const voiceSelect = document.getElementById("voiceSelect");
+    const speakBtn = document.getElementById("speakBtn");
+
+    let voices = [];
+
+    function loadVoices() {
+      voices = window.speechSynthesis.getVoices();
+
+      voiceSelect.innerHTML = "";
+
+      voices.forEach((voice) => {
+        const option = document.createElement("option");
+
+        option.textContent = `${voice.name} (${voice.lang})`;
+        option.setAttribute("data-name", voice.name);
+
+        if (voice.lang === "zh-TW") {
+          option.selected = true;
+        }
+
+        voiceSelect.appendChild(option);
+      });
+    }
+
+    // 有些瀏覽器 voices 會非同步載入
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    // 先執行一次
+    loadVoices();
+
     function speakText() {
-      const input = document.getElementById("textInput");
-      const text = input.value.trim();
+      const text = textInput.value.trim();
 
       if (!text) {
         alert("請先輸入文字");
         return;
       }
 
-      // 如果正在朗讀，先停止
       window.speechSynthesis.cancel();
 
       const utterance = new SpeechSynthesisUtterance(text);
 
-      // 設定語言
-      utterance.lang = "zh-TW";
+      // 你指定的寫法
+      const selectedOption =
+        voiceSelect.selectedOptions[0].getAttribute("data-name");
 
-      // 語速、音高、音量
+      // 用 data-name 找出對應的 voice
+      const selectedVoice = voices.find((voice) => {
+        return voice.name === selectedOption;
+      });
+
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+        utterance.lang = selectedVoice.lang;
+      }
+
       utterance.rate = 1;
       utterance.pitch = 1;
       utterance.volume = 1;
 
       window.speechSynthesis.speak(utterance);
     }
+
+    speakBtn.addEventListener("click", speakText);
   </script>
 </body>
 </html>
