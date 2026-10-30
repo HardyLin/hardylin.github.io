@@ -1,95 +1,93 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <title>選擇聲音朗讀</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="交通資料靜態網站爬蟲教學：12 筆模擬 ETag 門架資料直接寫入 HTML 表格，包含 banner、完整資料表格及 footer。">
+  <title>路徑資料所｜ETag 門架靜態資料</title>
+<style>
+@charset "UTF-8";
+:root{--ink:#172e2b;--muted:#61716c;--green:#0a6555;--line:#dce3dc;--paper:#f7f8f3;--orange:#ffbc67}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:30px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:14px;line-height:1.65}a{color:inherit;text-decoration:none}button,input,select{font:inherit}button,a,input,select,summary{outline-offset:5px}button,a{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}svg{display:block}.wrap{width:min(1280px,calc(100% - 96px));margin:auto}.site-header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{height:86px;display:flex;align-items:center;justify-content:space-between;gap:30px}.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;letter-spacing:1px}.brand-mark{width:38px;height:38px;background:var(--green);color:white;display:grid;place-items:center;border-radius:9px}.brand small{display:block;font-family:Arial,sans-serif;font-size:9px;font-weight:500;letter-spacing:2.2px;margin-top:-3px}.nav{display:flex;align-items:center;gap:31px;font-size:13px;font-weight:600}.nav a:hover{color:var(--green)}.teaching-tag{border:1px solid #c8d7cc;color:var(--green);font-size:11px;padding:5px 11px;border-radius:4px}.hero{background:#123c34;color:#fff;position:relative;overflow:hidden}.hero-inner{min-height:380px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px}.hero-copy{position:relative;z-index:1;padding:45px 0}.eyebrow{font-size:11px;font-weight:700;letter-spacing:2.7px;color:#a8c8ba;display:flex;align-items:center;gap:10px}.eyebrow:before{content:"";display:block;width:24px;height:2px;background:#e7b879}h1{font-size:clamp(31px,3.25vw,47px);line-height:1.4;letter-spacing:1.5px;margin:20px 0 17px;font-weight:700}.hero-copy p{color:#b7d0c4;max-width:430px;margin:0;font-size:14px;line-height:1.95}.hero-links{display:flex;gap:12px;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--line);border-radius:5px;padding:10px 17px;font-size:12px;font-weight:700;line-height:1.5;background:#fff;color:var(--ink)}.btn:hover{background:#edf1e8}.btn-primary{background:var(--orange);border-color:var(--orange);color:#263d30}.btn-primary:hover{background:#ffd29a}.btn-ghost{border-color:#57786b;color:#e2ece5;background:transparent}.btn-ghost:hover{background:#275246}.hero-art{width:100%;height:335px;overflow:visible}.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:7px;margin-top:26px}.stat{padding:21px 29px;position:relative}.stat:not(:last-child):after{content:"";position:absolute;top:23px;bottom:23px;right:0;width:1px;background:var(--line)}.stat-label{font-size:11px;color:var(--muted);margin-bottom:2px;display:flex;align-items:center;gap:8px}.stat-value{font-size:26px;font-weight:700;letter-spacing:-.8px}.stat-value span{font-size:12px;letter-spacing:0;font-weight:400;margin-left:7px;color:var(--muted)}.stat-value.date{font-size:21px;padding:4px 0 3px}.status-dot{width:6px;height:6px;border-radius:50%;background:#278675;display:inline-block}.section-top{display:flex;align-items:flex-end;justify-content:space-between;margin:39px 0 19px;gap:20px}.section-kicker{font-family:Arial,sans-serif;color:var(--green);font-size:10px;letter-spacing:1.8px;font-weight:700;margin-bottom:5px}h2{font-size:23px;margin:0;line-height:1.6;letter-spacing:.4px}.sub{margin:5px 0 0;color:var(--muted);font-size:12px}.section-actions{display:flex;gap:9px;align-items:center}.pill{font-size:10px;border:1px solid #d0e0d4;color:var(--green);background:#eaf1e8;border-radius:4px;padding:4px 9px;font-weight:700;white-space:nowrap}.notice{background:#f1f1e5;border:1px solid #e2e2d0;border-left:3px solid #b6a46c;padding:11px 16px;font-size:12px;margin-bottom:18px;display:flex;gap:9px;color:#655f43}.notice strong{font-weight:700;white-space:nowrap}.data-panel{border:1px solid var(--line);border-radius:7px;background:#fff;overflow:hidden}.filters{display:flex;align-items:center;gap:12px;padding:18px 21px;border-bottom:1px solid var(--line)}.search{position:relative;flex:1;max-width:370px}.search svg{position:absolute;left:12px;top:12px;color:#74857a}.search input{width:100%;padding:10px 12px 10px 38px;border:1px solid var(--line);border-radius:5px;background:#fbfcf9;font-size:12px;color:var(--ink)}.select-wrap{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)}select{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:5px;padding:9px 32px 9px 12px;font-size:12px}.reset{border:0;background:none;color:var(--muted);font-size:12px;text-decoration:underline;text-underline-offset:3px}.filter-note{margin-left:auto;color:var(--muted);font-size:11px}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap;font-size:12px}caption{text-align:left;position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}thead{background:#edf2ec}th{font-weight:600;color:#4c6259;font-size:11px;letter-spacing:.3px}th,td{padding:15px 18px;border-bottom:1px solid #e8ece6}td:first-child,th:first-child{padding-left:24px;color:#8b978e;width:54px}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#f5f8f1}.gantry-id{font-family:Consolas,"SFMono-Regular",monospace;color:#175c4e;font-weight:600;font-size:12px;letter-spacing:-.2px}.route{display:inline-block;font-size:10px;border:1px solid #c5d9c7;color:#386746;padding:0px 7px;border-radius:4px;background:#f4f8f0}.direction{display:table-cell}.direction b{margin-left:6px}.direction b{font-size:10px;color:#728478;font-weight:400}.number{font-variant-numeric:tabular-nums;font-family:Consolas,"SFMono-Regular",monospace;font-size:12px}.active{color:#2d7460;font-size:11px}.active:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#5a9d79;margin-right:6px}.table-bottom{display:flex;justify-content:space-between;gap:20px;align-items:center;background:#fafbf7;border-top:1px solid var(--line);padding:13px 23px;font-size:11px;color:var(--muted)}.source-label{font-family:Consolas,monospace;font-size:11px}.empty{padding:30px;text-align:center;color:var(--muted)}.learning{display:grid;grid-template-columns:1fr 1.35fr;gap:35px;margin:36px 0 45px;padding:28px 30px;background:#eaf0e7;border:1px solid #d7e1d4;border-radius:7px}.learning h3{font-size:18px;margin:5px 0 9px}.learning p{font-size:12px;line-height:1.9;color:#586b5f;margin:0 0 14px}.learning-links{display:flex;gap:16px;font-size:12px;font-weight:700;color:var(--green)}.learning-links a:hover{text-decoration:underline}.code-card{position:relative;border-radius:6px;overflow:hidden;background:#183d34;color:#d6e7da}.code-head{padding:9px 15px;border-bottom:1px solid #36584a;font-family:Consolas,monospace;color:#a1c0ac;font-size:10px;display:flex;justify-content:space-between}.copy-code{border:0;background:none;color:#cee1d1;cursor:pointer;font-size:10px}pre{margin:0;padding:18px;overflow-x:auto;font-family:Consolas,monospace;font-size:11px;line-height:1.85}.code-accent{color:#e9c48d}.site-footer{border-top:1px solid var(--line);background:#fff;padding:27px 0}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}.footer-brand{font-weight:700;font-size:14px;margin-bottom:4px}.footer-inner p{font-size:11px;color:var(--muted);margin:0}.footer-right{text-align:right;font-family:Arial,"Microsoft JhengHei",sans-serif}.footer-right a{color:var(--green)}.footer-right span{margin:0 7px;color:#a2ada2}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}@media(min-width:1500px){.hero-inner{min-height:405px}}@media(max-width:1000px){.wrap{width:calc(100% - 48px)}.nav{gap:18px}.hero-inner{grid-template-columns:1.1fr 1fr;gap:0}h1{font-size:35px}.hero-art{height:300px}.stat{padding:20px}.filter-note{display:none}.learning{gap:22px;padding:24px}.section-actions .pill{display:none}}@media(max-width:700px){.wrap{width:calc(100% - 32px)}.header-inner{height:72px}.brand{font-size:17px;gap:9px}.brand small{font-size:8px;letter-spacing:1.5px}.brand-mark{width:32px;height:34px}.nav{gap:16px}.nav a:not(:first-child),.teaching-tag{display:none}.hero-inner{display:block;position:relative;min-height:480px}.hero-copy{padding:35px 0 190px}h1{font-size:33px}.hero-copy p{font-size:12px;max-width:360px}.hero-art{position:absolute;height:205px;width:310px;right:-13px;bottom:-3px;opacity:.9}.hero-links{margin-top:20px}.eyebrow{font-size:9px;letter-spacing:2px}.stats{grid-template-columns:repeat(2,1fr);margin-top:20px}.stat{padding:15px 19px}.stat:nth-child(2):after{display:none}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.stat-value{font-size:23px}.stat-value.date{font-size:18px}.section-top{margin-top:28px;align-items:center}h2{font-size:19px}.section-top .sub{font-size:11px}.section-actions .btn{font-size:11px;padding:8px 10px;white-space:nowrap}.notice{font-size:11px;display:block;padding:10px 12px}.notice strong{margin-right:5px}.filters{flex-wrap:wrap;padding:13px;gap:9px}.search{max-width:none;flex-basis:100%}.select-wrap{flex:1}.select-wrap select{flex:1}.reset{padding:8px}.table-bottom{padding:12px 15px;flex-wrap:wrap;gap:3px}.learning{grid-template-columns:1fr;padding:20px;margin:25px 0 30px;gap:19px}.learning h3{font-size:17px}.learning p{font-size:12px}pre{font-size:10px;padding:14px}.footer-inner{display:block}.footer-right{text-align:left;margin-top:12px}.site-footer{padding:23px 0}}
+
+</style>
 </head>
 <body>
-  <h2>SpeechSynthesisUtterance 選擇聲音朗讀</h2>
-
-  <input
-    id="textInput"
-    type="text"
-    placeholder="請輸入要朗讀的文字"
-    style="width: 300px; padding: 8px;"
-  />
-
-  <br /><br />
-
-  <select id="voiceSelect" style="width: 320px; padding: 8px;">
-    <option>載入 voices 中...</option>
-  </select>
-
-  <br /><br />
-
-  <button id="speakBtn">朗讀</button>
-
-  <script>
-    const textInput = document.getElementById("textInput");
-    const voiceSelect = document.getElementById("voiceSelect");
-    const speakBtn = document.getElementById("speakBtn");
-
-    let voices = [];
-
-    function loadVoices() {
-      voices = window.speechSynthesis.getVoices();
-
-      voiceSelect.innerHTML = "";
-
-      voices.forEach((voice) => {
-        const option = document.createElement("option");
-
-        option.textContent = `${voice.name} (${voice.lang})`;
-        option.setAttribute("data-name", voice.name);
-
-        if (voice.lang === "zh-TW") {
-          option.selected = true;
-        }
-
-        voiceSelect.appendChild(option);
-      });
-    }
-
-    // 有些瀏覽器 voices 會非同步載入
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-
-    // 先執行一次
-    loadVoices();
-
-    function speakText() {
-      const text = textInput.value.trim();
-
-      if (!text) {
-        alert("請先輸入文字");
-        return;
-      }
-
-      window.speechSynthesis.cancel();
-
-      const utterance = new SpeechSynthesisUtterance(text);
-
-      // 你指定的寫法
-      const selectedOption =
-        voiceSelect.selectedOptions[0].getAttribute("data-name");
-
-      // 用 data-name 找出對應的 voice
-      const selectedVoice = voices.find((voice) => {
-        return voice.name === selectedOption;
-      });
-
-      if (selectedVoice) {
-        utterance.voice = selectedVoice;
-        utterance.lang = selectedVoice.lang;
-      }
-
-      utterance.rate = 1;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    speakBtn.addEventListener("click", speakText);
-  </script>
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="路徑資料所首頁"><span class="brand-mark"><svg width="24" height="26" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M7 3 3 23M17 3l4 20M12 4v4m0 4v4m0 4v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>路徑資料所<small>TRAFFIC DATA STUDIO</small></span></a>
+    <nav class="nav" aria-label="主要導覽"><a href="#overview">資料總覽</a><a href="#dataset">門架清單</a><span class="teaching-tag">教學範例網站</span></nav>
+  </div>
+</header>
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">OPEN ROADS. OPEN DATA.</div>
+        <h1 id="hero-title">每一座門架，<br>都是交通資料的起點。</h1>
+        <p>從道路、方向到地理座標，探索 ETag 門架基本資料。<br>用一張清楚的表格，開始你的第一個靜態網站爬蟲。</p>
+        <div class="hero-links"><a class="btn btn-primary" href="#dataset">探索門架資料 <span aria-hidden="true">↘</span></a></div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 560 350" role="img" aria-label="高速道路與 ETag 電子收費門架插畫">
+        <defs><pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#31574a" stroke-width=".6"/></pattern><pattern id="lines" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><path d="M0 0v20" stroke="#38604f" stroke-width="1"/></pattern></defs>
+        <rect x="8" y="5" width="540" height="330" fill="url(#grid)" opacity=".65"/>
+        <path d="M25 255 179 350h90L25 199zm385-249 139 87v80L321 6z" fill="#264c3e"/>
+        <path d="M-10 207 230 350h318L197 0H-10Z" fill="#224c3d" opacity=".35"/>
+        <g transform="translate(54,-5) rotate(32 245 170)">
+          <rect x="102" y="-60" width="288" height="480" rx="26" fill="#0c2e28"/>
+          <rect x="110" y="-60" width="272" height="480" rx="20" fill="#476254"/>
+          <rect x="115" y="-60" width="262" height="480" fill="#284d40"/>
+          <path d="M122-60V420M370-60V420" stroke="#8b9c7e" stroke-width="2"/>
+          <path d="M164-60V420M207-60V420M285-60V420M328-60V420" stroke="#b0bca0" stroke-width="1.3" stroke-dasharray="16 16" opacity=".75"/>
+          <rect x="241" y="-60" width="10" height="480" fill="#829378"/>
+          <path d="M246-60V420" stroke="#b6bda0" stroke-width="1.2"/>
+          <g fill="#b6c6ad"><path d="m183 215 8-12 8 12h-5v15h-6v-15z"/><path d="m305 265-8 12-8-12h5v-15h6v15z"/></g>
+          <g transform="translate(180 46)"><rect width="23" height="45" rx="5" fill="#ffbf70"/><rect x="3" y="8" width="17" height="9" rx="2" fill="#264b3c"/><rect x="3" y="32" width="17" height="7" rx="2" fill="#b88d59"/><path d="M4 2h4m7 0h4" stroke="#fff0d0" stroke-width="2"/></g>
+          <g transform="translate(292 190)"><rect width="23" height="44" rx="5" fill="#d8e4cd"/><rect x="3" y="27" width="17" height="9" rx="2" fill="#315747"/><rect x="3" y="5" width="17" height="7" rx="2" fill="#a1b49a"/></g>
+          <g transform="translate(137 303)"><rect width="23" height="44" rx="5" fill="#87b5a0"/><rect x="3" y="8" width="17" height="9" rx="2" fill="#264b3c"/></g>
+          <g><path d="M93 153h307v18H93z" fill="#082e25" opacity=".65"/><path d="M99 121h294v12H99z" fill="#9bac91"/><path d="M99 121v45m294-45v45" stroke="#adb99d" stroke-width="7"/><path d="M106 121v-28h280v28M106 94l34 27 35-27 35 27 35-27 35 27 35-27 35 27 35-27" fill="none" stroke="#91a788" stroke-width="2"/><rect x="217" y="91" width="58" height="32" rx="3" fill="#e4e8cb"/><text x="246" y="113" fill="#1f5140" font-family="Arial,sans-serif" font-size="16" font-weight="700" text-anchor="middle">eTag</text><g fill="#d7e9d4"><rect x="143" y="129" width="12" height="8" rx="2"/><rect x="184" y="129" width="12" height="8" rx="2"/><rect x="295" y="129" width="12" height="8" rx="2"/><rect x="337" y="129" width="12" height="8" rx="2"/></g></g>
+        </g>
+        <g fill="#7fa68a" opacity=".7"><circle cx="69" cy="85" r="13"/><circle cx="49" cy="112" r="9"/><circle cx="469" cy="279" r="14"/><circle cx="492" cy="257" r="10"/></g>
+        <path d="M375 54h72v33" stroke="#d7bb86" fill="none" stroke-dasharray="3 4"/><circle cx="375" cy="54" r="3" fill="#ffbc67"/><rect x="426" y="86" width="92" height="43" rx="4" fill="#204d3f" stroke="#577762"/><text x="439" y="102" font-family="Arial" font-size="8" fill="#a1c0ac" letter-spacing="1">STATIC DATA</text><text x="439" y="118" font-family="Arial" font-size="11" fill="#f0dfb7">12 RECORDS</text>
+        <text x="20" y="325" font-family="Arial" font-size="8" fill="#80a591" letter-spacing="2">ETAG GANTRY / ROAD NETWORK</text>
+      </svg>
+    </div>
+  </section>
+  <div class="wrap">
+    <section class="stats" id="overview" aria-label="資料集概況">
+      <div class="stat"><div class="stat-label">門架資料筆數</div><div class="stat-value">12<span>筆教學資料</span></div></div>
+      <div class="stat"><div class="stat-label">涵蓋道路</div><div class="stat-value">台 88<span>快速道路</span></div></div>
+      <div class="stat"><div class="stat-label">資料提供方式</div><div class="stat-value">HTML<span>靜態表格</span></div></div>
+      <div class="stat"><div class="stat-label"><span class="status-dot"></span>範例版本日期</div><div class="stat-value date"><time datetime="2026-10-29">2026.10.29</time></div></div>
+    </section>
+    <section id="dataset" aria-labelledby="dataset-title">
+      <div class="section-top"><div><div class="section-kicker">01 / GANTRY DATASET</div><h2 id="dataset-title">ETag 門架基本資料</h2><p class="sub">從門架編號出發，讀懂每一筆交通設施資料。</p></div><div class="section-actions"><span class="pill">靜態 HTML</span></div></div>
+      <div class="notice" role="note"><strong>教學資料聲明</strong><span>本頁門架編號、里程、座標與狀態均為模擬資料，僅供靜態爬蟲練習，非官方資料或即時交通資訊。</span></div>
+      <div class="data-panel">
+        <div class="filters"><strong style="font-size:12px">門架資料一覽</strong><span class="pill">完整資料集 · 12 筆</span><span class="filter-note">所有資料均可從網頁原始碼讀取</span></div>
+        <div class="table-scroll"><table id="gantry-table">
+          <caption>ETag 門架基本資料：12 筆模擬資料</caption>
+          <thead><tr><th scope="col">序號</th><th scope="col" data-field="gantry_id">門架編號</th><th scope="col" data-field="road">道路</th><th scope="col" data-field="direction">方向</th><th scope="col" data-field="mileage">里程</th><th scope="col" data-field="longitude">經度</th><th scope="col" data-field="latitude">緯度</th><th scope="col" data-field="status">狀態</th></tr></thead>
+          <tbody>
+            <tr data-direction="E"><td>01</td><td class="gantry-id">eTag-38-0880-000-001</td><td><span class="route">台 88</span></td><td class="direction">東向 <b>→</b></td><td class="number">0K+500</td><td class="number">120.351200</td><td class="number">22.586400</td><td class="active">啟用</td></tr>
+            <tr data-direction="W"><td>02</td><td class="gantry-id">eTag-38-0880-000-002</td><td><span class="route">台 88</span></td><td class="direction">西向 <b>←</b></td><td class="number">0K+500</td><td class="number">120.351100</td><td class="number">22.586600</td><td class="active">啟用</td></tr>
+            <tr data-direction="E"><td>03</td><td class="gantry-id">eTag-38-0880-003-001</td><td><span class="route">台 88</span></td><td class="direction">東向 <b>→</b></td><td class="number">3K+200</td><td class="number">120.376500</td><td class="number">22.580800</td><td class="active">啟用</td></tr>
+            <tr data-direction="W"><td>04</td><td class="gantry-id">eTag-38-0880-005-001</td><td><span class="route">台 88</span></td><td class="direction">西向 <b>←</b></td><td class="number">5K+100</td><td class="number">120.394800</td><td class="number">22.575600</td><td class="active">啟用</td></tr>
+            <tr data-direction="E"><td>05</td><td class="gantry-id">eTag-38-0880-008-001</td><td><span class="route">台 88</span></td><td class="direction">東向 <b>→</b></td><td class="number">8K+400</td><td class="number">120.426300</td><td class="number">22.569700</td><td class="active">啟用</td></tr>
+            <tr data-direction="W"><td>06</td><td class="gantry-id">eTag-38-0880-008-002</td><td><span class="route">台 88</span></td><td class="direction">西向 <b>←</b></td><td class="number">8K+400</td><td class="number">120.426200</td><td class="number">22.569900</td><td class="active">啟用</td></tr>
+            <tr data-direction="E"><td>07</td><td class="gantry-id">eTag-38-0880-013-001</td><td><span class="route">台 88</span></td><td class="direction">東向 <b>→</b></td><td class="number">13K+100</td><td class="number">120.471600</td><td class="number">22.561200</td><td class="active">啟用</td></tr>
+            <tr data-direction="W"><td>08</td><td class="gantry-id">eTag-38-0880-014-001</td><td><span class="route">台 88</span></td><td class="direction">西向 <b>←</b></td><td class="number">14K+300</td><td class="number">120.483100</td><td class="number">22.559100</td><td class="active">啟用</td></tr>
+            <tr data-direction="E"><td>09</td><td class="gantry-id">eTag-38-0880-017-001</td><td><span class="route">台 88</span></td><td class="direction">東向 <b>→</b></td><td class="number">17K+600</td><td class="number">120.514900</td><td class="number">22.551400</td><td class="active">啟用</td></tr>
+            <tr data-direction="W"><td>10</td><td class="gantry-id">eTag-38-0880-019-001</td><td><span class="route">台 88</span></td><td class="direction">西向 <b>←</b></td><td class="number">19K+200</td><td class="number">120.530400</td><td class="number">22.548300</td><td class="active">啟用</td></tr>
+            <tr data-direction="W"><td>11</td><td class="gantry-id">eTag-38-0880-022-001</td><td><span class="route">台 88</span></td><td class="direction">西向 <b>←</b></td><td class="number">22K+100</td><td class="number">120.558300</td><td class="number">22.541800</td><td class="active">啟用</td></tr>
+            <tr data-direction="W"><td>12</td><td class="gantry-id">eTag-38-0880-022-002</td><td><span class="route">台 88</span></td><td class="direction">西向 <b>←</b></td><td class="number">22K+700</td><td class="number">120.564100</td><td class="number">22.540600</td><td class="active">啟用</td></tr>
+          </tbody>
+        </table></div>
+        <div id="empty-state" class="empty" role="status" hidden>找不到符合條件的門架，請調整關鍵字或行車方向。</div>
+        <div class="table-bottom"><span aria-live="polite">顯示 <strong id="result-count">12</strong> 筆，共 12 筆模擬資料</span><span class="source-label">table#gantry-table → tbody → tr → td</span></div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><div><div class="footer-brand">路徑資料所 <span style="font-weight:400;color:#9aa99b;margin:0 5px">/</span> Traffic Data Studio</div><p>讓交通資料更容易閱讀，也讓資料擷取更容易入門。</p></div><div class="footer-right"><p><a href="#dataset">門架資料</a><span>·</span><a href="#top">回到頂端 ↑</a></p><p>© 2026 Traffic Data Studio. 教學範例 · 全部資料均為模擬。</p></div></div></footer>
 </body>
 </html>
